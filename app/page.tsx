@@ -240,7 +240,9 @@ source "$CONFIG_FILE" && claude
             {/* Script Downloads */}
             <div className="grid grid-cols-2 gap-4">
               <a 
-                href="/install.sh" 
+                href="https://raw.githubusercontent.com/abhijitbiswas2028-creator/claude-code/main/public/install.sh" 
+                target="_blank"
+                rel="noopener noreferrer"
                 download="install.sh"
                 className="flex items-center justify-center gap-2 py-3 bg-[#111111] hover:bg-[#1A1A1A] border border-[#2D2D2D] text-white rounded-lg transition-colors font-medium text-sm"
               >
@@ -248,7 +250,9 @@ source "$CONFIG_FILE" && claude
                 Download macOS/Linux Script
               </a>
               <a 
-                href="/install.ps1" 
+                href="https://raw.githubusercontent.com/abhijitbiswas2028-creator/claude-code/main/public/install.ps1" 
+                target="_blank"
+                rel="noopener noreferrer"
                 download="install.ps1"
                 className="flex items-center justify-center gap-2 py-3 bg-[#111111] hover:bg-[#1A1A1A] border border-[#2D2D2D] text-white rounded-lg transition-colors font-medium text-sm"
               >
