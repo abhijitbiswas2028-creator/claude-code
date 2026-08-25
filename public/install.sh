@@ -33,8 +33,8 @@ if [ "$NODE_VERSION" -lt 18 ]; then
 fi
 
 # 3. Install the package globally (Modified Version)
-echo -e "${BLUE}Running: npm install -g git+https://github.com/abhijitbiswas2028-creator/claude-code.git${NC}"
-if npm install -g git+https://github.com/abhijitbiswas2028-creator/claude-code.git --no-fund --no-audit; then
+echo -e "${BLUE}Running: npm install -g @anthropic-ai/claude-code${NC}"
+if npm install -g @anthropic-ai/claude-code --no-fund --no-audit; then
     echo -e "\n${GREEN}✔ Installation successful!${NC}"
     echo -e "To get started, simply run:\n  ${GREEN}claude${NC}"
 else
