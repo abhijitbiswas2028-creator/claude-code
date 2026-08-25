@@ -35,8 +35,42 @@ For more installation options, uninstall steps, and troubleshooting, see the [se
 
 2. Navigate to your project directory and run `claude`.
 
-## Configuring 3rd-Party Providers (Amazon Bedrock, Vertex AI)
-Claude Code natively supports 3rd-party enterprise model providers. You can easily configure them using the local web dashboard or via terminal:
+## Configuring 3rd-Party Platforms & Providers
+
+Claude Code in this custom branch natively supports an extended list of 3rd-party platforms and custom enterprise model providers. You can easily configure them using the **built-in Web Dashboard** included in this repository, or via terminal.
+
+### Supported Providers:
+- **Anthropic (Asemprotic / Custom Compatible)**
+- **OpenAI (ChatGPT, Codex, Custom Compatible)**
+- **Google Gemini** & **Vertex AI**
+- **Amazon Bedrock**
+- **Microsoft Foundry**
+- **OpenRouter** & **OpenCodeZen**
+
+### Web Dashboard Configuration
+This fork includes a Next.js web dashboard that provides an interactive GUI to easily generate connection scripts for all supported providers. Just run the development server or use the hosted deployment, select your provider, and it will output the exact CLI commands required.
+
+### Terminal Configuration Examples:
+
+**Microsoft Foundry:**
+```bash
+export FOUNDRY_API_KEY="your_api_key"
+export FOUNDRY_ENDPOINT="https://your-foundry-endpoint"
+claude config set provider foundry
+```
+
+**Custom Anthropic (asimprotic) Compatible:**
+```bash
+export ANTHROPIC_API_KEY="your_api_key"
+export ANTHROPIC_BASE_URL="https://your-custom-url.com/v1"
+claude config set provider anthropic
+```
+
+**OpenCodeZen:**
+```bash
+export OPENAI_API_KEY="your_api_key"
+export OPENAI_BASE_URL="https://api.opencodezen.com/v1"
+```
 
 **Amazon Bedrock:**
 ```bash
