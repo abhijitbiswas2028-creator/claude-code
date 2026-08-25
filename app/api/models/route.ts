@@ -48,7 +48,7 @@ export async function POST(req: Request) {
          throw new Error('Invalid response format from provider.');
       }
 
-    } else if (provider === 'anthropic') {
+    } else if (provider === 'anthropic' || provider === 'custom_anthropic') {
       // Anthropic doesn't expose a standard /v1/models endpoint for API keys in the same way.
       // We provide the standard models here.
       models = [

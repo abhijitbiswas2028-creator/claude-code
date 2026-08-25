@@ -86,6 +86,12 @@ export default function InstallPage() {
     if (provider === 'anthropic') {
       cmds.push(`export ANTHROPIC_API_KEY="********"`);
       cmds.push(`claude config set provider anthropic`);
+    } else if (provider === 'custom_anthropic') {
+      cmds.push(`export ANTHROPIC_API_KEY="********"`);
+      if (baseUrl) {
+        cmds.push(`export ANTHROPIC_BASE_URL="${baseUrl}"`);
+      }
+      cmds.push(`claude config set provider anthropic`);
     } else if (provider === 'gemini') {
       cmds.push(`export GEMINI_API_KEY="********"`);
       cmds.push(`claude config set provider gemini`);
@@ -279,10 +285,11 @@ source "$CONFIG_FILE" && claude
                     <option value="bedrock">Amazon Bedrock</option>
                     <option value="vertex">Google Vertex AI</option>
                     <option value="custom">Custom OpenAI Compatible</option>
+                    <option value="custom_anthropic">Custom Anthropic (asimprotic) Compatible</option>
                   </select>
                 </div>
 
-                {(provider === 'custom' || provider === 'opencodezen') && (
+                {(provider === 'custom' || provider === 'custom_anthropic' || provider === 'opencodezen') && (
                   <div>
                     <label className="block text-xs font-medium text-[#888] mb-1 uppercase tracking-wider">Base URL</label>
                     <input 
