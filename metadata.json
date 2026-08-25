@@ -1,0 +1,6 @@
+{
+  "name": "Claude Code CLI",
+  "description": "Terminal-based installation guide and workspace setup for Anthropic's Claude Code.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
