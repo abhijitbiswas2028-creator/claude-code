@@ -30,7 +30,7 @@ For more installation options, uninstall steps, and troubleshooting, see the [se
 
     **NPM:**
     ```bash
-    npm install -g git+https://github.com/abhijitbiswas2028-creator/claude-code.git
+    npm install -g @anthropic-ai/claude-code
     ```
 
 2. Navigate to your project directory and run `claude`.
