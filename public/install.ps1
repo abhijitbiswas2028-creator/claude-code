@@ -31,9 +31,9 @@ if ($nodeMajor -lt 18) {
 }
 
 # 3. Install globally (Modified Version)
-Write-Host "Running: npm install -g git+https://github.com/YOUR_USERNAME/claude-code.git" -ForegroundColor DarkGray
+Write-Host "Running: npm install -g git+https://github.com/abhijitbiswas2028-creator/claude-code.git" -ForegroundColor DarkGray
 try {
-    npm install -g git+https://github.com/YOUR_USERNAME/claude-code.git
+    npm install -g git+https://github.com/abhijitbiswas2028-creator/claude-code.git
     Write-Host "`n`u{2714} Installation successful!" -ForegroundColor Green
     Write-Host "To get started, simply run: claude" -ForegroundColor White
 } catch {
