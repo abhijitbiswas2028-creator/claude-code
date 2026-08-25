@@ -67,6 +67,20 @@ export async function POST(req: Request) {
         { id: 'gemini-1.5-pro', name: 'Gemini 1.5 Pro' },
         { id: 'gemini-1.5-flash', name: 'Gemini 1.5 Flash' }
       ];
+    } else if (provider === 'bedrock') {
+      models = [
+        { id: 'anthropic.claude-3-7-sonnet-20250219-v1:0', name: 'Claude 3.7 Sonnet (Bedrock)' },
+        { id: 'anthropic.claude-3-5-sonnet-20241022-v2:0', name: 'Claude 3.5 Sonnet (Bedrock)' },
+        { id: 'anthropic.claude-3-5-haiku-20241022-v1:0', name: 'Claude 3.5 Haiku (Bedrock)' },
+        { id: 'anthropic.claude-3-opus-20240229-v1:0', name: 'Claude 3 Opus (Bedrock)' }
+      ];
+    } else if (provider === 'vertex') {
+      models = [
+        { id: 'claude-3-7-sonnet@20250219', name: 'Claude 3.7 Sonnet (Vertex)' },
+        { id: 'claude-3-5-sonnet-v2@20241022', name: 'Claude 3.5 Sonnet (Vertex)' },
+        { id: 'claude-3-5-haiku@20241022', name: 'Claude 3.5 Haiku (Vertex)' },
+        { id: 'claude-3-opus@20240229', name: 'Claude 3 Opus (Vertex)' }
+      ];
     } else {
       throw new Error('Unsupported provider.');
     }

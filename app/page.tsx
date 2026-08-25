@@ -10,6 +10,9 @@ export default function InstallPage() {
   const [provider, setProvider] = useState('openai');
   const [baseUrl, setBaseUrl] = useState('');
   const [apiKey, setApiKey] = useState('');
+  const [awsRegion, setAwsRegion] = useState('us-east-1');
+  const [gcpProject, setGcpProject] = useState('');
+  const [gcpRegion, setGcpRegion] = useState('us-central1');
   const [models, setModels] = useState<{id: string, name: string}[]>([]);
   const [selectedModel, setSelectedModel] = useState('');
   const [isFetching, setIsFetching] = useState(false);
@@ -78,20 +81,32 @@ export default function InstallPage() {
 
   const generateConfigCommand = () => {
     if (!selectedModel) return '';
-    let envVars = [];
+    let cmds = [];
     
     if (provider === 'anthropic') {
-      envVars.push(`export ANTHROPIC_API_KEY="********"`);
+      cmds.push(`export ANTHROPIC_API_KEY="********"`);
+      cmds.push(`claude config set provider anthropic`);
     } else if (provider === 'gemini') {
-      envVars.push(`export GEMINI_API_KEY="********"`);
+      cmds.push(`export GEMINI_API_KEY="********"`);
+      cmds.push(`claude config set provider gemini`);
+    } else if (provider === 'bedrock') {
+      cmds.push(`export AWS_ACCESS_KEY_ID="********"`);
+      cmds.push(`export AWS_SECRET_ACCESS_KEY="********"`);
+      cmds.push(`export AWS_REGION="${awsRegion || 'us-east-1'}"`);
+      cmds.push(`claude config set provider bedrock`);
+    } else if (provider === 'vertex') {
+      cmds.push(`claude config set gcpProject "${gcpProject}"`);
+      cmds.push(`claude config set gcpRegion "${gcpRegion || 'us-central1'}"`);
+      cmds.push(`claude config set provider vertex`);
     } else {
-      envVars.push(`export OPENAI_API_KEY="********"`);
+      cmds.push(`export OPENAI_API_KEY="********"`);
       if (baseUrl) {
-        envVars.push(`export OPENAI_BASE_URL="${baseUrl}"`);
+        cmds.push(`export OPENAI_BASE_URL="${baseUrl}"`);
       }
     }
     
-    return `${envVars.join('\n')}\nclaude config set defaultModel ${selectedModel}`;
+    cmds.push(`claude config set defaultModel ${selectedModel}`);
+    return cmds.join('\n');
   };
 
   const handleDownloadApplyScript = () => {
@@ -261,6 +276,8 @@ source "$CONFIG_FILE" && claude
                     <option value="openrouter">OpenRouter</option>
                     <option value="opencodezen">OpenCodeZen</option>
                     <option value="gemini">Google Gemini</option>
+                    <option value="bedrock">Amazon Bedrock</option>
+                    <option value="vertex">Google Vertex AI</option>
                     <option value="custom">Custom OpenAI Compatible</option>
                   </select>
                 </div>
@@ -278,19 +295,59 @@ source "$CONFIG_FILE" && claude
                   </div>
                 )}
 
-                <div>
-                  <label className="block text-xs font-medium text-[#888] mb-1 uppercase tracking-wider">API Key</label>
-                  <div className="relative">
-                    <Key className="w-4 h-4 absolute left-3 top-2.5 text-[#555]" />
+                {provider === 'bedrock' && (
+                  <div>
+                    <label className="block text-xs font-medium text-[#888] mb-1 uppercase tracking-wider">AWS Region</label>
                     <input 
-                      type="password" 
-                      value={apiKey}
-                      onChange={(e) => setApiKey(e.target.value)}
-                      placeholder="sk-..."
-                      className="w-full bg-[#1A1A1A] border border-[#2D2D2D] rounded pl-9 pr-3 py-2 text-white focus:outline-none focus:border-[#50FA7B] transition-colors font-mono"
+                      type="text" 
+                      value={awsRegion}
+                      onChange={(e) => setAwsRegion(e.target.value)}
+                      placeholder="us-east-1"
+                      className="w-full bg-[#1A1A1A] border border-[#2D2D2D] rounded px-3 py-2 text-white focus:outline-none focus:border-[#50FA7B] transition-colors font-mono"
                     />
                   </div>
-                </div>
+                )}
+
+                {provider === 'vertex' && (
+                  <>
+                    <div>
+                      <label className="block text-xs font-medium text-[#888] mb-1 uppercase tracking-wider">GCP Project ID</label>
+                      <input 
+                        type="text" 
+                        value={gcpProject}
+                        onChange={(e) => setGcpProject(e.target.value)}
+                        placeholder="my-gcp-project"
+                        className="w-full bg-[#1A1A1A] border border-[#2D2D2D] rounded px-3 py-2 text-white focus:outline-none focus:border-[#50FA7B] transition-colors font-mono"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-[#888] mb-1 uppercase tracking-wider">GCP Region</label>
+                      <input 
+                        type="text" 
+                        value={gcpRegion}
+                        onChange={(e) => setGcpRegion(e.target.value)}
+                        placeholder="us-central1"
+                        className="w-full bg-[#1A1A1A] border border-[#2D2D2D] rounded px-3 py-2 text-white focus:outline-none focus:border-[#50FA7B] transition-colors font-mono"
+                      />
+                    </div>
+                  </>
+                )}
+
+                {provider !== 'vertex' && (
+                  <div>
+                    <label className="block text-xs font-medium text-[#888] mb-1 uppercase tracking-wider">API Key</label>
+                    <div className="relative">
+                      <Key className="w-4 h-4 absolute left-3 top-2.5 text-[#555]" />
+                      <input 
+                        type="password" 
+                        value={apiKey}
+                        onChange={(e) => setApiKey(e.target.value)}
+                        placeholder={provider === 'bedrock' ? 'AWS Access / Secret Key (via env)' : 'sk-...'}
+                        className="w-full bg-[#1A1A1A] border border-[#2D2D2D] rounded pl-9 pr-3 py-2 text-white focus:outline-none focus:border-[#50FA7B] transition-colors font-mono"
+                      />
+                    </div>
+                  </div>
+                )}
 
                 <button 
                   onClick={fetchModels}

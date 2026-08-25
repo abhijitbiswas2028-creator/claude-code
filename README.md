@@ -35,6 +35,24 @@ For more installation options, uninstall steps, and troubleshooting, see the [se
 
 2. Navigate to your project directory and run `claude`.
 
+## Configuring 3rd-Party Providers (Amazon Bedrock, Vertex AI)
+Claude Code natively supports 3rd-party enterprise model providers. You can easily configure them using the local web dashboard or via terminal:
+
+**Amazon Bedrock:**
+```bash
+export AWS_ACCESS_KEY_ID="your_access_key"
+export AWS_SECRET_ACCESS_KEY="your_secret_key"
+export AWS_REGION="us-east-1"
+claude config set provider bedrock
+```
+
+**Google Vertex AI:**
+```bash
+claude config set gcpProject "your-gcp-project-id"
+claude config set gcpRegion "us-central1"
+claude config set provider vertex
+```
+
 ## Plugins
 
 This repository includes several Claude Code plugins that extend functionality with custom commands and agents. See the [plugins directory](./plugins/README.md) for detailed documentation on available plugins.
