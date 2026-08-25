@@ -34,11 +34,11 @@ fi
 
 # 3. Install the package globally (Modified Version)
 echo -e "${BLUE}Running: npm install -g git+https://github.com/abhijitbiswas2028-creator/claude-code.git${NC}"
-if npm install -g @anthropic-ai/claude-code; then
+if npm install -g @anthropic-ai/claude-code --no-fund --no-audit; then
     echo -e "\n${GREEN}✔ Installation successful!${NC}"
     echo -e "To get started, simply run:\n  ${GREEN}claude${NC}"
 else
-    echo -e "\n${RED}✖ Installation failed. You may need to run this script with sudo:${NC}"
-    echo -e "  sudo bash install.sh"
+    echo -e "\n${RED}✖ Installation failed. You may need root permissions. Try running:${NC}"
+    echo -e "  curl -fsSL https://raw.githubusercontent.com/abhijitbiswas2028-creator/claude-code/main/public/install.sh | sudo bash"
     exit 1
 fi

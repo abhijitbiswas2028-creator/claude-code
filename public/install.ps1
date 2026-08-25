@@ -33,10 +33,11 @@ if ($nodeMajor -lt 18) {
 # 3. Install globally (Modified Version)
 Write-Host "Running: npm install -g git+https://github.com/abhijitbiswas2028-creator/claude-code.git" -ForegroundColor DarkGray
 try {
-    npm install -g @anthropic-ai/claude-code
+    npm install -g @anthropic-ai/claude-code --no-fund --no-audit
     Write-Host "`n`u{2714} Installation successful!" -ForegroundColor Green
     Write-Host "To get started, simply run: claude" -ForegroundColor White
 } catch {
     Write-Host "`n`u{2716} Installation failed. Please ensure you have administrator privileges." -ForegroundColor Red
+    Write-Host "Please open PowerShell as Administrator and run the command again." -ForegroundColor Yellow
     exit 1
 }
