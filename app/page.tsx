@@ -100,6 +100,10 @@ export default function InstallPage() {
       cmds.push(`export AWS_SECRET_ACCESS_KEY="********"`);
       cmds.push(`export AWS_REGION="${awsRegion || 'us-east-1'}"`);
       cmds.push(`claude config set provider bedrock`);
+    } else if (provider === 'foundry') {
+      cmds.push(`export FOUNDRY_API_KEY="********"`);
+      if (baseUrl) cmds.push(`export FOUNDRY_ENDPOINT="${baseUrl}"`);
+      cmds.push(`claude config set provider foundry`);
     } else if (provider === 'vertex') {
       cmds.push(`claude config set gcpProject "${gcpProject}"`);
       cmds.push(`claude config set gcpRegion "${gcpRegion || 'us-central1'}"`);
@@ -283,13 +287,14 @@ source "$CONFIG_FILE" && claude
                     <option value="opencodezen">OpenCodeZen</option>
                     <option value="gemini">Google Gemini</option>
                     <option value="bedrock">Amazon Bedrock</option>
+                    <option value="foundry">Microsoft Foundry</option>
                     <option value="vertex">Google Vertex AI</option>
                     <option value="custom">Custom OpenAI Compatible</option>
                     <option value="custom_anthropic">Custom Anthropic (asimprotic) Compatible</option>
                   </select>
                 </div>
 
-                {(provider === 'custom' || provider === 'custom_anthropic' || provider === 'opencodezen') && (
+                {(provider === 'custom' || provider === 'custom_anthropic' || provider === 'opencodezen' || provider === 'foundry') && (
                   <div>
                     <label className="block text-xs font-medium text-[#888] mb-1 uppercase tracking-wider">Base URL</label>
                     <input 

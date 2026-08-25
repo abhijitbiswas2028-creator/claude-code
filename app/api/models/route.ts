@@ -81,6 +81,12 @@ export async function POST(req: Request) {
         { id: 'claude-3-5-haiku@20241022', name: 'Claude 3.5 Haiku (Vertex)' },
         { id: 'claude-3-opus@20240229', name: 'Claude 3 Opus (Vertex)' }
       ];
+    } else if (provider === 'foundry') {
+      models = [
+        { id: 'claude-3-7-sonnet-20250219', name: 'Claude 3.7 Sonnet (Foundry)' },
+        { id: 'claude-3-5-sonnet-20241022', name: 'Claude 3.5 Sonnet (Foundry)' },
+        { id: 'claude-3-5-haiku-20241022', name: 'Claude 3.5 Haiku (Foundry)' }
+      ];
     } else {
       throw new Error('Unsupported provider.');
     }
